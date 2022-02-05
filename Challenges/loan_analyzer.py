@@ -2,7 +2,8 @@
 #Kristen Potter's Code
 import csv
 from pathlib import Path
-print("Testing Upload to GitHub")
+from typing import Any
+
 """Part 1: Automate the Calculations.
 
 Automate the calculations for the loan portfolio summaries.
@@ -18,17 +19,20 @@ loan_costs = [500, 600, 200, 1000, 450]
 # How many loans are in the list?
 # @TODO: Use the `len` function to calculate the total number of loans in the list.
 # Print the number of loans from the list
-# YOUR CODE HERE!
+NumberOfLoans = len(loan_costs)
+print("Number of Loans:",NumberOfLoans)
 
 # What is the total of all loans?
 # @TODO: Use the `sum` function to calculate the total of all loans in the list.
 # Print the total value of the loans
-# YOUR CODE HERE!
+SumOfLoans = sum(loan_costs)
+print("Sum of the Loans:",SumOfLoans)
 
 # What is the average loan amount from the list?
 # @TODO: Using the sum of all loans and the total number of loans, calculate the average loan price.
 # Print the average loan amount
-# YOUR CODE HERE!
+AverageOfLoans = SumOfLoans / NumberOfLoans
+print("Average of the Loans:",AverageOfLoans)
 
 """Part 2: Analyze Loan Data.
 
@@ -63,15 +67,18 @@ loan = {
 
 # @TODO: Use get() on the dictionary of additional information to extract the Future Value and Remaining Months on the loan.
 # Print each variable.
-# YOUR CODE HERE!
+future_value = loan.get("future_value")
+remaining_months = loan.get("remaining_months")
+print("Future Value of Loan:", future_value)
+print("The number of remaining months of the loan:", remaining_months)
 
 
 # @TODO: Use the formula for Present Value to calculate a "fair value" of the loan.
 # Use a minimum required return of 20% as the discount rate.
 #   You'll want to use the **monthly** version of the present value formula.
 #   HINT: Present Value = Future Value / (1 + Discount_Rate/12) ** remaining_months
-
-# YOUR CODE HERE!
+annual_discount_rate = 0.2
+PresentValue = future_value / (1 + annual_discount_rate/12) ** remaining_months
 
 # If Present Value represents what the loan is really worth, does it make sense to buy the loan at its cost?
 # @TODO: Write a conditional statement (an if-else statement) to decide if the present value represents the loan's fair value.
@@ -104,7 +111,7 @@ new_loan = {
 #    The function should return the `present_value` for the loan.
 # YOUR CODE HERE!
 
-
+present_value = 1
 # @TODO: Use the function to calculate the present value of the new loan given below.
 #    Use an `annual_discount_rate` of 0.2 for this new loan calculation.
 # YOUR CODE HERE!
