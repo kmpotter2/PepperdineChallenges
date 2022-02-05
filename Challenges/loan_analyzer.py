@@ -84,7 +84,9 @@ PresentValue = future_value / (1 + annual_discount_rate/12) ** remaining_months
 # @TODO: Write a conditional statement (an if-else statement) to decide if the present value represents the loan's fair value.
 #    If the present value of the loan is greater than or equal to the cost, then print a message that says the loan is worth at least the cost to buy it.
 #    Else, the present value of the loan is less than the loan cost, then print a message that says that the loan is too expensive and not worth the price.
-# YOUR CODE HERE!
+if PresentValue >= loan["loan_price"]:
+    print("The Loan is worth at least the cost to buy it.")
+else: print("The loan is too expensive and not worth the price")
 
 
 """Part 3: Perform Financial Calculations.
@@ -109,14 +111,18 @@ new_loan = {
 # @TODO: Define a new function that will be used to calculate present value.
 #    This function should include parameters for `future_value`, `remaining_months`, and the `annual_discount_rate`
 #    The function should return the `present_value` for the loan.
-# YOUR CODE HERE!
+#   HINT: Present Value = Future Value / (1 + Discount_Rate/12) ** remaining_months
+def CalculatePresentValue(a,b,c):
+    present_value = a / (1 + c/12) ** b
+    return present_value
 
-present_value = 1
 # @TODO: Use the function to calculate the present value of the new loan given below.
 #    Use an `annual_discount_rate` of 0.2 for this new loan calculation.
-# YOUR CODE HERE!
-print(f"The present value of the loan is: {present_value}")
-
+present_value = CalculatePresentValue(
+    new_loan["future_value"],
+    new_loan["remaining_months"],
+    annual_discount_rate)
+print(f"The present value for this loan is: {present_value}")
 
 """Part 4: Conditionally filter lists of loans.
 
@@ -157,35 +163,47 @@ loans = [
 ]
 
 # @TODO: Create an empty list called `inexpensive_loans`
-# YOUR CODE HERE!
+inexpensive_loans = []
 
 # @TODO: Loop through all the loans and append any that cost $500 or less to the `inexpensive_loans` list
-# YOUR CODE HERE!
+# i = 0
+# while i<len(loans):
+#     if loans[i]["loan_price"] <= 500:
+#         inexpensive_loans.append(loans[i]["loan_price"])
+#     i = i + 1
+for i in loans:
+    if i["loan_price"] <= 500:
+        inexpensive_loans.append(i)
 
 # @TODO: Print the `inexpensive_loans` list
-# YOUR CODE HERE!
+print(inexpensive_loans)
 
 
-"""Part 5: Save the results.
+# """Part 5: Save the results.
 
-Output this list of inexpensive loans to a csv file
-    1. Use `with open` to open a new CSV file.
-        a. Create a `csvwriter` using the `csv` library.
-        b. Use the new csvwriter to write the header variable as the first row.
-        c. Use a for loop to iterate through each loan in `inexpensive_loans`.
-            i. Use the csvwriter to write the `loan.values()` to a row in the CSV file.
+# Output this list of inexpensive loans to a csv file
+#     1. Use `with open` to open a new CSV file.
+#         a. Create a `csvwriter` using the `csv` library.
+#         b. Use the new csvwriter to write the header variable as the first row.
+#         c. Use a for loop to iterate through each loan in `inexpensive_loans`.
+#             i. Use the csvwriter to write the `loan.values()` to a row in the CSV file.
 
-    Hint: Refer to the official documentation for the csv library.
-    https://docs.python.org/3/library/csv.html#writer-objects
+#     Hint: Refer to the official documentation for the csv library.
+#     https://docs.python.org/3/library/csv.html#writer-objects
 
-"""
+# """
 
-# Set the output header
-header = ["loan_price", "remaining_months", "repayment_interval", "future_value"]
+# # Set the output header
+# header = ["loan_price", "remaining_months", "repayment_interval", "future_value"]
 
-# Set the output file path
-output_path = Path("inexpensive_loans.csv")
+# # Set the output file path
+# output_path = Path("inexpensive_loans.csv")
 
-# @TODO: Use the csv library and `csv.writer` to write the header row
-# and each row of `loan.values()` from the `inexpensive_loans` list.
-# YOUR CODE HERE!
+# # @TODO: Use the csv library and `csv.writer` to write the header row
+# # and each row of `loan.values()` from the `inexpensive_loans` list.
+csvpath = Path("my_output.csv")
+print("Writing the data to a CSV file...")
+with open(csvpath, 'w', newline='') as csvfile:
+    csvwriter = csv.writer(csvfile)
+    for loan in inexpensive_loans:
+        csvwriter.writerow(loan.values())
