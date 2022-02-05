@@ -1,7 +1,8 @@
 # coding: utf-8
+#Kristen Potter's Code
 import csv
 from pathlib import Path
-
+print("Testing Upload to GitHub")
 """Part 1: Automate the Calculations.
 
 Automate the calculations for the loan portfolio summaries.
