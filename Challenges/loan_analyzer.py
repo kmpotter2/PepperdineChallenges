@@ -3,7 +3,7 @@
 import csv
 from pathlib import Path
 from typing import Any
-
+#test GitHub
 """Part 1: Automate the Calculations.
 
 Automate the calculations for the loan portfolio summaries.
